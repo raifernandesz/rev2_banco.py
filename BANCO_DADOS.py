@@ -74,3 +74,117 @@ print(cursor.fetchall())
 
 banco.commit()
 banco.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import sqlite3
+
+conn = sqlite3.connect('biblioteca.db')
+cursor = conn.cursor()
+
+# Tabela autores
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS AUTORES (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT,
+    nacionalidade TEXT
+)
+''')
+
+# Tabela livros
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS LIVROS ( 
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo TEXT NOT NULL,
+    autor_id INTEGER,
+    ano_publicacao INTEGER,
+    genero TEXT,
+    FOREIGN KEY (autor_id) REFERENCES AUTORES(id)
+)
+''')
+
+# Tabela emprestimos
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS EMPRESTIMOS (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_livro INTEGER,
+    nome_aluno TEXT,
+    data_emprestimo TEXT,
+    data_devolucao TEXT,
+    FOREIGN KEY (id_livro) REFERENCES LIVROS(id)
+)
+''')
+
+# Inserindo autores
+cursor.execute("INSERT INTO AUTORES (nome, nacionalidade) VALUES('Valentina', 'Brasileira')")
+cursor.execute("INSERT INTO AUTORES (nome, nacionalidade) VALUES('Camila', 'Brasileira')")
+cursor.execute("INSERT INTO AUTORES (nome, nacionalidade) VALUES('Maria', 'Italiana')")
+cursor.execute("INSERT INTO AUTORES (nome, nacionalidade) VALUES('João','Espanhol')")
+cursor.execute("INSERT INTO AUTORES (nome, nacionalidade) VALUES('Pedro', 'Brasileiro')")
+cursor.execute("INSERT INTO AUTORES (nome, nacionalidade) VALUES('Leticia', 'Brasileira')")
+
+# Inserindo livros
+cursor.execute("INSERT INTO LIVROS (titulo, autor_id, ano_publicacao, genero) VALUES('Asas da Liberdade', 1, 2020, 'Romance')")
+cursor.execute("INSERT INTO LIVROS (titulo, autor_id, ano_publicacao, genero) VALUES('O Segredo do Tempo', 2, 2018, 'Ficção Científica')")
+cursor.execute("INSERT INTO LIVROS (titulo, autor_id, ano_publicacao, genero) VALUES('A Cidade dos Sonhos', 3, 2019, 'Fantasia')")
+cursor.execute("INSERT INTO LIVROS (titulo, autor_id, ano_publicacao, genero) VALUES('O Último Guardião', 4, 2021, 'Aventura')")
+cursor.execute("INSERT INTO LIVROS (titulo, autor_id, ano_publicacao, genero) VALUES('Divergente', 5, 2017, 'Distopia')")
+cursor.execute("INSERT INTO LIVROS (titulo, autor_id, ano_publicacao, genero) VALUES('O Código da Vida', 6, 2022, 'Suspense')")
+
+# Inserindo empréstimos
+cursor.execute("INSERT INTO EMPRESTIMOS (id_livro, nome_aluno, data_emprestimo, data_devolucao) VALUES(1, 'Clarice Lispector', '10/10/2023', '20/10/2023')")
+cursor.execute("INSERT INTO EMPRESTIMOS (id_livro, nome_aluno, data_emprestimo, data_devolucao) VALUES(2, 'Machado de Assis', '11/11/2023', '21/11/2023')")
+cursor.execute("INSERT INTO EMPRESTIMOS (id_livro, nome_aluno, data_emprestimo, data_devolucao) VALUES(3, 'Jorge Amado', '12/12/2023', '22/12/2023')")
+cursor.execute("INSERT INTO EMPRESTIMOS (id_livro, nome_aluno, data_emprestimo, data_devolucao) VALUES(4, 'Graciliano Ramos', '13/01/2024', '23/01/2024')")
+cursor.execute("INSERT INTO EMPRESTIMOS (id_livro, nome_aluno, data_emprestimo, data_devolucao) VALUES(5, 'Cecília Meireles', '14/02/2024', '24/02/2024')")
+cursor.execute("INSERT INTO EMPRESTIMOS (id_livro, nome_aluno, data_emprestimo, data_devolucao) VALUES(6,  'José de Alencar', '15/03/2024', '25/03/2024')")
+
+
+
+# cursor.execute("UPDATE emprestimos SET data_devolucao = ? WHERE id = ?", ('30/10/2023', 1))
+
+
+
+
+
+
+
+
+
+conn.commit()
+conn.close()
+
