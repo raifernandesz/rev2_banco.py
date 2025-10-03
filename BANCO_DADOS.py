@@ -80,6 +80,32 @@ banco.close()
 
 
 
+UPDATE 
+cursor.execute("UPDATE emprestimos SET data_devolucao = '22/02/2024' WHERE id = 3")
+cursor.execute ("UPDATE livros SET ano_publicacao = 2021 WHERE id = 5")
+OU SEJA UPDATE (NOME DA TABELA) SET (NOME DA COLUNA) = 'NOVO VALOR' WHERE (CONDICAO) NO CASO, ID = 3
+
+
+
+SELECT 
+cursor.execute("SELECT * FROM AUTORES")
+print(cursor.fetchall())
+
+cursor.execute("SELECT  nome_aluno,data_emprestimo, data_devolucao FROM EMPRESTIMOS WHERE nome_aluno = 'José de Alencar'")
+OU SEJA, SELECIONA AS COLUNAS (NOME DA COLUNA) DA TABELA (NOME DA TABELA) ONDE (CONDICAO) NO CASO, NOME_ALUNO = 'JOSÉ DE ALENCAR'
+cursor.execute("SELECT titulo, ano_publicacao FROM LIVROS WHERE ano_publicacao >= 2020")
+OU SEJA, SELECIONA AS COLUNAS (NOME DA COLUNA) DA TABELA (NOME DA TABELA) ONDE (CONDICAO) NO CASO, ANO_PUBLICACAO >= 2020
+print(cursor.fetchall())
+
+
+DELETE 
+cursor.execute("DELETE FROM EMPRESTIMOS WHERE id = 6")
+OU SEJA, DELETA DA TABELA (NOME DA TABELA) ONDE (CONDICAO) NO CASO, ID = 6
+
+
+
+
+
 
 
 
@@ -187,4 +213,5 @@ cursor.execute("INSERT INTO EMPRESTIMOS (id_livro, nome_aluno, data_emprestimo, 
 
 conn.commit()
 conn.close()
+
 
